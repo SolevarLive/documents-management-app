@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.ui.controllers.CreateDialogController"
+      spacing="10" style="-fx-padding: 20;">
+    <children>
+
+        <TitledPane text="Накладная" animated="false" expanded="true">
+            <content>
+                <VBox spacing="8" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Label text="Номер:"/>
+                        <TextField fx:id="invoiceNumberField" promptText="НК-001"/>
+                        <Label text="Дата:"/>
+                        <DatePicker fx:id="invoiceDatePicker"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Пользователь:"/>
+                        <TextField fx:id="invoiceUserField" promptText="Иванов И.И."/>
+                        <Label text="Сумма:"/>
+                        <TextField fx:id="invoiceAmountField" promptText="10000"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Валюта:"/>
+                        <TextField fx:id="invoiceCurrencyField" promptText="RUB"/>
+                        <Label text="Курс:"/>
+                        <TextField fx:id="invoiceRateField" promptText="1.0"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Товар:"/>
+                        <TextField fx:id="invoiceProductField" promptText="Ноутбук"/>
+                        <Label text="Кол-во:"/>
+                        <TextField fx:id="invoiceQuantityField" promptText="1"/>
+                    </HBox>
+
+                    <Button fx:id="createInvoiceButton"
+                            text="Создать накладную"
+                            onAction="#handleCreateInvoice"
+                            maxWidth="Infinity"/>
+                </VBox>
+            </content>
+        </TitledPane>
+
+        <TitledPane text="Платёжка" animated="false" expanded="false">
+            <content>
+                <VBox spacing="8" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Label text="Номер:"/>
+                        <TextField fx:id="paymentNumberField" promptText="ПЛ-001"/>
+                        <Label text="Дата:"/>
+                        <DatePicker fx:id="paymentDatePicker"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Пользователь:"/>
+                        <TextField fx:id="paymentUserField" promptText="Петров П.П."/>
+                        <Label text="Сумма:"/>
+                        <TextField fx:id="paymentAmountField" promptText="5000"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Сотрудник:"/>
+                        <TextField fx:id="paymentEmployeeField" promptText="Сидоров С.С."/>
+                    </HBox>
+
+                    <Button fx:id="createPaymentButton"
+                            text="Создать платёжку"
+                            onAction="#handleCreatePayment"
+                            maxWidth="Infinity"/>
+                </VBox>
+            </content>
+        </TitledPane>
+
+        <TitledPane text="Заявка на оплату" animated="false" expanded="false">
+            <content>
+                <VBox spacing="8" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Label text="Номер:"/>
+                        <TextField fx:id="requestNumberField" promptText="ЗО-001"/>
+                        <Label text="Дата:"/>
+                        <DatePicker fx:id="requestDatePicker"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Пользователь:"/>
+                        <TextField fx:id="requestUserField" promptText="Иванов И.И."/>
+                        <Label text="Сумма:"/>
+                        <TextField fx:id="requestAmountField" promptText="15000"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Контрагент:"/>
+                        <TextField fx:id="requestCounterpartyField" promptText="ООО Ромашка"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Валюта:"/>
+                        <TextField fx:id="requestCurrencyField" promptText="USD"/>
+                        <Label text="Курс:"/>
+                        <TextField fx:id="requestRateField" promptText="95.5"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Комиссия:"/>
+                        <TextField fx:id="requestCommissionField" promptText="100.0"/>
+                    </HBox>
+
+                    <Button fx:id="createRequestButton"
+                            text="Создать заявку"
+                            onAction="#handleCreateRequest"
+                            maxWidth="Infinity"/>
+                </VBox>
+            </content>
+        </TitledPane>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Отмена" onAction="#handleCancel"/>
+        </HBox>
+
+    </children>
+</VBox>

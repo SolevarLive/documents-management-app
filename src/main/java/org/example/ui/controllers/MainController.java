@@ -48,7 +48,34 @@ public class MainController implements Initializable {
         this.service = service;
     }
 
-    @FXML private void handleCreate() { /* заглушка */ }
+    @FXML private void handleCreate() {
+        javafx.scene.control.ChoiceDialog<String> dialog = new javafx.scene.control.ChoiceDialog<>(
+                "Накладная", javafx.collections.FXCollections.observableArrayList("Накладная", "Платёжка", "Заявка на оплату"));
+        dialog.setTitle("Создать документ");
+        dialog.setHeaderText("Выберите тип документа");
+
+        dialog.showAndWait().ifPresent(type -> {
+            try {
+                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/create-dialog.fxml"));
+                javafx.scene.Scene dialogScene = new javafx.scene.Scene(loader.load(), 500, 600);
+                CreateDialogController controller = loader.getController();
+                controller.setService(service);
+
+                javafx.stage.Stage dialogStage = new javafx.stage.Stage();
+                dialogStage.setScene(dialogScene);
+                dialogStage.setTitle("Создать " + type);
+                dialogStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                dialogStage.showAndWait();
+
+                refreshTable();
+            } catch (Exception e) {
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+                alert.setContentText("Ошибка открытия диалога: " + e.getMessage());
+                alert.show();
+            }
+        });
+    }
+
     @FXML private void handleSave() { /* заглушка */ }
     @FXML private void handleLoad() { /* заглушка */ }
     @FXML private void handleView() {
