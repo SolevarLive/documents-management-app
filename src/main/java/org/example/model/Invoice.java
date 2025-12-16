@@ -1,7 +1,10 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.time.LocalDate;
 
+@JsonTypeName("Invoice")
 public class Invoice extends Document {
     private final String currency;
     private final double exchangeRate;
@@ -16,6 +19,11 @@ public class Invoice extends Document {
         this.product = product;
         this.quantity = quantity;
     }
+
+    public String getCurrency() { return currency; }
+    public double getExchangeRate() { return exchangeRate; }
+    public String getProduct() { return product; }
+    public double getQuantity() { return quantity; }
 
     @Override
     public String getTypeName() { return "Накладная"; }

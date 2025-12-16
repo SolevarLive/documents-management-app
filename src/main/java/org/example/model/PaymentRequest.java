@@ -1,7 +1,10 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.time.LocalDate;
 
+@JsonTypeName("PaymentRequest")
 public class PaymentRequest extends Document {
     private final String counterparty;
     private final String currency;
@@ -16,6 +19,12 @@ public class PaymentRequest extends Document {
         this.exchangeRate = exchangeRate;
         this.commission = commission;
     }
+
+    public String getCounterparty() { return counterparty; }
+    public String getCurrency() { return currency; }
+    public double getExchangeRate() { return exchangeRate; }
+    public double getCommission() { return commission; }
+
 
     @Override
     public String getTypeName() { return "Заявка на оплату"; }

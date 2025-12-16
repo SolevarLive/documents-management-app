@@ -1,7 +1,10 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.time.LocalDate;
 
+@JsonTypeName("Payment")
 public class Payment extends Document {
     private final String employee;
 
@@ -9,6 +12,8 @@ public class Payment extends Document {
         super(number, date, user, amount);
         this.employee = employee;
     }
+
+    public String getEmployee() { return employee; }
 
     @Override
     public String getTypeName() { return "Платёжка"; }
