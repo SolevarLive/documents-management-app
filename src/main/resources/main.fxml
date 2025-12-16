@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ui.controllers.MainController">
+    <children>
+        <HBox style="-fx-padding: 10;" spacing="10">
+            <children>
+                <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" text="Создать" />
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSave" text="Сохранить" />
+                <Button fx:id="loadButton" mnemonicParsing="false" onAction="#handleLoad" text="Загрузить" />
+                <Button fx:id="viewButton" mnemonicParsing="false" onAction="#handleView" text="Просмотр" />
+                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDelete" text="Удалить" />
+                <Region HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
+        <TableView fx:id="documentsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="selectColumn" prefWidth="50.0" text="Выб." />
+                <TableColumn fx:id="typeColumn" prefWidth="150.0" text="Тип" />
+                <TableColumn fx:id="numberColumn" prefWidth="120.0" text="Номер" />
+                <TableColumn fx:id="dateColumn" prefWidth="120.0" text="Дата" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>
