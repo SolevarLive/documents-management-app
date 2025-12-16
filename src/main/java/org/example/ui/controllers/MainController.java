@@ -5,9 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.stage.FileChooser;
 import org.example.interfaces.DocumentService;
 import org.example.model.Document;
+import org.example.repository.JsonDocumentRepository;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -76,8 +79,55 @@ public class MainController implements Initializable {
         });
     }
 
-    @FXML private void handleSave() { /* заглушка */ }
-    @FXML private void handleLoad() { /* заглушка */ }
+    @FXML private void handleSave() {
+        var fileChooser = new FileChooser();
+        fileChooser.setTitle("Сохранить документы");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON", "*.json"));
+        File file = fileChooser.showSaveDialog(documentsTable.getScene().getWindow());
+
+        if (file != null) {
+            var jsonRepo = new JsonDocumentRepository(file);
+            service.clearAll();
+            for (Document doc : documentsTable.getItems()) {
+                jsonRepo.add(doc);
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Сохранено в " + file.getName());
+            alert.show();
+        }
+    }
+
+    @FXML private void handleLoad() {
+        var fileChooser = new FileChooser();
+        fileChooser.setTitle("Загрузить документы");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON", "*.json"));
+        File file = fileChooser.showOpenDialog(documentsTable.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                var jsonRepo = new JsonDocumentRepository(file);
+                List<Document> loadedDocuments = jsonRepo.getAll();
+
+                service.clearAll();
+                for (Document doc : loadedDocuments) {
+                    service.createDocument(doc);
+                }
+                refreshTable();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Загружено " + loadedDocuments.size() + " документов");
+                alert.show();
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Ошибка загрузки: " + e.getMessage());
+                alert.show();
+            }
+        }
+    }
+
+
     @FXML private void handleView() {
         Document selected = documentsTable.getSelectionModel().getSelectedItem();
         if (selected != null && service != null) {

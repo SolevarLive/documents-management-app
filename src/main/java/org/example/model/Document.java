@@ -1,9 +1,18 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Invoice.class, name = "Invoice"),
+        @JsonSubTypes.Type(value = Payment.class, name = "Payment"),
+        @JsonSubTypes.Type(value = PaymentRequest.class, name = "PaymentRequest")
+})
 public abstract class Document implements Serializable {
     private final String number;
     private final LocalDate date;
@@ -34,6 +43,4 @@ public abstract class Document implements Serializable {
     public String toString(){
         return toListString();
     }
-
-
 }
